@@ -1,0 +1,477 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --cosmic-bg: #000000;
+    --cosmic-deep: #0a0a0f;
+    --cosmic-surface: #1a1a2e;
+    --cosmic-border: #2a2a3e;
+    --cosmic-text: #ffffff;
+    --cosmic-text-muted: #a0a0b0;
+    --cosmic-accent: #6b46c1;
+    --nebula-purple: #b794f6;
+    --nebula-blue: #667eea;
+    --entity-alpha: #4299e1;
+    --entity-omega: #f56565;
+    --cosmic-glow: rgba(107, 70, 193, 0.3);
+    --radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body { 
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif; 
+    margin: 0; 
+    padding: 0;
+    background: var(--cosmic-bg);
+    color: var(--cosmic-text);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+#particleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.page { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 { 
+    margin: 20px 0 10px; 
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--nebula-purple), var(--nebula-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.subtitle { 
+    margin: 0 0 30px; 
+    color: var(--cosmic-text-muted); 
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+    animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+
+.ws-indicator {
+    display: block;
+    margin: 0 auto 20px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--cosmic-deep);
+    color: var(--cosmic-text-muted);
+    border: 1px solid var(--cosmic-border);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    width: fit-content;
+    text-align: center;
+}
+
+.ws-connected { 
+    background: rgba(72, 187, 120, 0.1); 
+    color: #48bb78; 
+    border-color: rgba(72, 187, 120, 0.3); 
+}
+
+.ws-polling { 
+    background: rgba(66, 153, 225, 0.1); 
+    color: #4299e1; 
+    border-color: rgba(66, 153, 225, 0.3); 
+}
+
+.card { 
+    background: rgba(26, 26, 46, 0.8); 
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--cosmic-border);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.8s ease-out 0.2s both;
+    position: relative;
+    z-index: 10;
+}
+
+.inputs { 
+    margin-bottom: 24px;
+}
+
+label { 
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--cosmic-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input[type="text"], 
+input[type="number"], 
+select { 
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--cosmic-border);
+    border-radius: 8px;
+    background: var(--cosmic-deep);
+    color: var(--cosmic-text);
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+input[type="text"]:focus, 
+input[type="number"]:focus, 
+select:focus { 
+    outline: none;
+    border-color: var(--cosmic-accent);
+    box-shadow: 0 0 0 3px var(--cosmic-glow);
+}
+
+.input-row { 
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.input-row label {
+    flex: 1;
+}
+
+.buttons { 
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.btn { 
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: var(--cosmic-surface);
+    color: var(--cosmic-text);
+    border: 1px solid var(--cosmic-border);
+    font-family: inherit;
+}
+
+.btn.primary { 
+    background: linear-gradient(135deg, var(--cosmic-accent), var(--nebula-purple));
+    border-color: transparent;
+    box-shadow: 0 4px 15px var(--cosmic-glow);
+}
+
+.btn:hover { 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(107, 70, 193, 0.4);
+}
+
+.btn:disabled { 
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.status { 
+    padding: 12px 16px;
+    background: var(--cosmic-deep);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: var(--cosmic-text-muted);
+    text-align: center;
+    border: 1px solid var(--cosmic-border);
+}
+
+.progress-container {
+    margin-bottom: 16px;
+}
+
+.progress-bar { 
+    height: 6px;
+    background: var(--cosmic-deep);
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid var(--cosmic-border);
+    position: relative;
+}
+
+.progress-fill { 
+    height: 100%;
+    background: linear-gradient(90deg, var(--entity-alpha), var(--nebula-purple));
+    transition: width 0.3s ease;
+    border-radius: 3px;
+    box-shadow: 0 0 10px var(--cosmic-glow);
+}
+
+.thread { 
+    max-height: 500px;
+    overflow-y: auto;
+    margin-bottom: 24px;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.thread.charging {
+    animation: pulseGlow 1.5s ease-in-out infinite;
+}
+
+.argument { 
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    animation: slideIn 0.4s ease-out;
+    position: relative;
+    background: rgba(26, 26, 46, 0.6);
+    border: 1px solid var(--cosmic-border);
+}
+
+.argument.for { 
+    border-left: 3px solid var(--entity-alpha);
+    background: rgba(66, 153, 225, 0.08);
+    box-shadow: 0 0 20px rgba(66, 153, 225, 0.15);
+}
+
+.argument.against { 
+    border-left: 3px solid var(--entity-omega);
+    background: rgba(245, 101, 101, 0.08);
+    box-shadow: 0 0 20px rgba(245, 101, 101, 0.15);
+}
+
+.argument.typing {
+    animation: slideIn 0.4s ease-out, pulse 1.5s ease-in-out infinite;
+}
+
+.arg-header { 
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--cosmic-text-muted);
+    flex-wrap: wrap;
+}
+
+.arg-number {
+    opacity: 0.6;
+}
+
+.arg-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.arg-side.for {
+    color: var(--entity-alpha);
+}
+
+.arg-side.against {
+    color: var(--entity-omega);
+}
+
+.arg-origin {
+    font-size: 11px;
+    opacity: 0.5;
+}
+
+.arg-content { 
+    line-height: 1.7;
+    color: var(--cosmic-text);
+    font-size: 15px;
+    font-weight: 400;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.conclusion { 
+    padding: 24px;
+    background: linear-gradient(135deg, rgba(107, 70, 193, 0.1), rgba(102, 126, 234, 0.1));
+    border-radius: 10px;
+    border: 1px solid var(--cosmic-accent);
+    animation: slideIn 0.5s ease-out;
+    box-shadow: 0 0 30px var(--cosmic-glow);
+}
+
+.conclusion h3 { 
+    margin: 0 0 12px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--nebula-purple);
+    text-align: center;
+}
+
+.conclusion p {
+    margin: 0;
+    line-height: 1.7;
+    font-size: 15px;
+    color: var(--cosmic-text);
+}
+
+#particleContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.cosmic-particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: starTwinkle 3s ease-in-out infinite;
+}
+
+.constellation-line {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--nebula-purple), transparent);
+    opacity: 0.3;
+    animation: constellationPulse 2s ease-in-out infinite;
+}
+
+@keyframes fadeIn { 
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp { 
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn { 
+    from { 
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { 
+        box-shadow: 0 0 5px rgba(107, 70, 193, 0.2); 
+    }
+    50% { 
+        box-shadow: 0 0 15px rgba(107, 70, 193, 0.5); 
+    }
+}
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+@keyframes constellationPulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.5; }
+}
+
+.thread::-webkit-scrollbar { 
+    width: 6px;
+}
+
+.thread::-webkit-scrollbar-track { 
+    background: var(--cosmic-deep);
+    border-radius: 3px;
+}
+
+.thread::-webkit-scrollbar-thumb { 
+    background: var(--cosmic-accent);
+    border-radius: 3px;
+}
+
+.thread::-webkit-scrollbar-thumb:hover { 
+    background: var(--nebula-purple);
+}
+
+@media (max-width: 768px) { 
+    .page { 
+        margin: 20px auto;
+        padding: 0 16px;
+    }
+
+    h1 { 
+        font-size: 32px;
+    }
+
+    .card { 
+        padding: 20px;
+    }
+
+    .input-row { 
+        flex-direction: column;
+    }
+
+    .buttons { 
+        flex-direction: column;
+    }
+
+    .btn { 
+        width: 100%;
+    }
+
+    .thread { 
+        max-height: 400px;
+    }
+}
+
+@media (max-width: 480px) { 
+    h1 {
+        font-size: 28px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+}

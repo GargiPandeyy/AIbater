@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Debate Arena</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+    
+    <div class="page">
+        <h1>⭐ Cosmic Debate Arena</h1>
+        <p class="subtitle">Where thoughts collide in the cosmos</p>
+        
+        <div id="wsIndicator" class="ws-indicator ws-connected" aria-live="polite" aria-label="Connection status">Polling</div>
+
+        <div class="card">
+            <div class="inputs">
+                <label>Debate Topic:</label>
+                <input id="topicInput" type="text" placeholder="Enter a debate topic (e.g., 'Should homework be banned?')" aria-label="Debate topic" maxlength="500">
+                
+                <div class="input-row">
+                    <label>Number of turns:
+                        <input id="turnsInput" type="number" value="10" min="2" max="200" aria-label="Number of turns">
+                    </label>
+                    <label>Start side:
+                        <select id="startSide" aria-label="Starting side">
+                            <option value="for">For</option>
+                            <option value="against">Against</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="buttons">
+                    <button id="startBtn" class="btn primary">🚀 Start Debate</button>
+                    <button id="nextBtn" class="btn" disabled>➡ Next Turn</button>
+                </div>
+            </div>
+
+            <div class="status" id="status" role="status" aria-live="polite">Idle. Start a debate to begin.</div>
+
+            <div class="progress-container"></div>
+
+            <div id="thread" class="thread"></div>
+
+            <div class="conclusion" id="conclusion" style="display:none;"></div>
+        </div>
+        
+        <div id="particleContainer" aria-hidden="true"></div>
+    </div>
+
+    <script type="module" src="debater.js"></script>
+</body>
+</html>
