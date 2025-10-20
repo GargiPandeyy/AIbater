@@ -1,5 +1,4 @@
 const { loadEnv } = require('./config/env');
-const { connectDB } = require('./config/database');
 const { logger, httpLogger } = require('./utils/logger');
 
 const config = loadEnv();
@@ -79,13 +78,7 @@ app.use(errorHandler);
 async function startServer() {
   try {
     console.log('');
-    console.log('🔌 Connecting to MongoDB...');
-    
-    try {
-      await connectDB();
-    } catch (dbError) {
-      console.warn('⚠️ Running without database');
-    }
+    console.log('⚠️ Running without database');
 
     console.log('');
     console.log('🌐 Starting HTTP server...');
